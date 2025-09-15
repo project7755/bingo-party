@@ -1,6 +1,7 @@
-/* Global safety */
+/* Global safety + prevent sideways scroll */
 html, body, #root { width:100%; margin:0; padding:0; }
 * { box-sizing: border-box; }
+html { -webkit-text-size-adjust: 100%; }
 
 /* App wrapper */
 .bp-wrap { max-width:1100px; margin:0 auto; padding:12px; }
@@ -9,24 +10,24 @@ html, body, #root { width:100%; margin:0; padding:0; }
 .bp-head { display:flex; justify-content:space-between; align-items:center; gap:8px; }
 .bp-head .bp-head-right { display:flex; gap:8px; flex-wrap:wrap; min-width:0; }
 
-/* Inputs / buttons: mobile-friendly sizes */
+/* Inputs / buttons: make big on mobile */
 .bp-input {
-  padding: 12px 14px;
+  padding: 14px 16px !important;
   border: 1px solid #ccc;
-  border-radius: 10px;
+  border-radius: 12px;
   min-width: 0;
-  font-size: 16px;      /* >=16px prevents iOS zoom */
+  font-size: 18px !important;    /* >= 16px prevents iOS zoom; 18 is comfy */
   line-height: 1.2;
-  min-height: 44px;     /* Apple HIG tap target */
+  min-height: 50px !important;   /* nice tap target */
 }
 .bp-btn {
-  padding: 12px 14px;
-  border-radius: 10px;
+  padding: 14px 16px !important;
+  border-radius: 12px;
   border: 1px solid #ddd;
   background: #f8f8f8;
   cursor: pointer;
-  font-size: 16px;
-  min-height: 44px;
+  font-size: 18px !important;
+  min-height: 50px !important;
 }
 .bp-btn:hover { background:#f1f1f1; }
 
@@ -39,7 +40,8 @@ html, body, #root { width:100%; margin:0; padding:0; }
 .bp-pool-row { display:flex; justify-content:space-between; gap:12px; padding:8px 10px; border-bottom:1px solid #f5f5f5; }
 
 /* Board */
-.bp-board { display:grid; grid-template-columns:repeat(5,1fr); gap:8px; }
+.bp-board-wrap { width:100%; max-width:100%; overflow:hidden; }
+.bp-board { display:grid; grid-template-columns:repeat(5, minmax(0,1fr)); gap:8px; margin:0 auto; width:100%; }
 .bp-cell {
   aspect-ratio:1/1;
   display:flex; align-items:center; justify-content:center;
@@ -48,19 +50,28 @@ html, body, #root { width:100%; margin:0; padding:0; }
 .bp-cell span { display:-webkit-box; -webkit-line-clamp:3; -webkit-box-orient:vertical; overflow:hidden; }
 .bp-pill { padding:2px 8px; border-radius:8px; }
 
-/* Mobile */
+/* Mobile: stack; full-width controls; scale board to avoid scrolling */
 @media (max-width: 900px) {
   .bp-wrap { padding:10px; }
   .bp-layout { grid-template-columns:1fr; }
   .bp-head { flex-direction:column; align-items:stretch; gap:10px; }
   .bp-head .bp-head-right { width:100%; }
-  .bp-input, .bp-btn { width:100%; } /* full width controls on phones */
+  .bp-input, .bp-btn { width:100%; }
 }
-@media (max-width: 480px) {
-  .bp-board { gap:6px; }
+
+/* Progressive downscaling for narrow phones */
+@media (max-width: 420px) {
+  .bp-board { gap:6px; transform: scale(0.92); transform-origin: top center; }
   .bp-cell { padding:6px; border-radius:10px; }
   .bp-cell span { -webkit-line-clamp:2; }
 }
+@media (max-width: 380px) {
+  .bp-board { transform: scale(0.86); }
+}
+@media (max-width: 340px) {
+  .bp-board { transform: scale(0.80); }
+}
+
 
 
 
