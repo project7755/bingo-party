@@ -192,7 +192,8 @@ export default function BingoPartyCloud(){
       {/* Header */}
       <div className="bp-head">
         <div>
-          <div style={{fontSize:20,fontWeight:700}}>BINGO Party</div>
+          <div style={{fontSize:20,fontWeight:700}}>BINGO Party ✨ TEST</div>
+
         </div>
         <div className="bp-head-right">
           <input
