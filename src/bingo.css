@@ -1,0 +1,63 @@
+/* Global safety */
+html, body, #root { width:100%; margin:0; padding:0; }
+* { box-sizing: border-box; }
+
+/* App wrapper */
+.bp-wrap { max-width:1100px; margin:0 auto; padding:12px; }
+
+/* Header */
+.bp-head { display:flex; justify-content:space-between; align-items:center; gap:8px; }
+.bp-head .bp-head-right { display:flex; gap:8px; flex-wrap:wrap; min-width:0; }
+.bp-input {
+  padding: 12px 14px;
+  border: 1px solid #ccc;
+  border-radius: 10px;
+  min-width: 0;
+  font-size: 16px;      /* >= 16px prevents iOS zoom */
+  line-height: 1.2;
+  min-height: 44px;     /* Apple HIG tap target */
+}
+.bp-btn {
+  padding: 12px 14px;
+  border-radius: 10px;
+  border: 1px solid #ddd;
+  background: #f8f8f8;
+  cursor: pointer;
+  font-size: 16px;
+  min-height: 44px;
+}
+.bp-btn:hover { background:#f1f1f1; }
+
+/* Two-column layout on desktop */
+.bp-layout { display:grid; grid-template-columns: 1fr 1.4fr; gap:16px; margin-top:16px; }
+.bp-card { border:1px solid #eee; border-radius:12px; padding:12px; background:#fff; }
+
+/* Word pool list */
+.bp-pool-list { max-height:240px; overflow:auto; border:1px solid #eee; border-radius:8px; }
+.bp-pool-row { display:flex; justify-content:space-between; gap:12px; padding:8px 10px; border-bottom:1px solid #f5f5f5; }
+
+/* Board */
+.bp-board { display:grid; grid-template-columns:repeat(5,1fr); gap:8px; }
+.bp-cell {
+  aspect-ratio:1/1;
+  display:flex; align-items:center; justify-content:center;
+  text-align:center; padding:8px; border-radius:12px; border:1px solid #e5e5e5; overflow:hidden;
+}
+.bp-cell span { display:-webkit-box; -webkit-line-clamp:3; -webkit-box-orient:vertical; overflow:hidden; }
+.bp-pill { padding:2px 8px; border-radius:8px; }
+
+/* Mobile */
+@media (max-width: 900px) {
+  .bp-wrap { padding:10px; }
+  .bp-layout { grid-template-columns:1fr; }
+  .bp-head { flex-direction:column; align-items:stretch; gap:10px; }
+  .bp-head .bp-head-right { width:100%; }
+  .bp-input, .bp-btn { width:100%; }
+}
+@media (max-width: 480px) {
+  .bp-board { gap:6px; }
+  .bp-cell { padding:6px; border-radius:10px; }
+  .bp-cell span { -webkit-line-clamp:2; }
+}
+
+
